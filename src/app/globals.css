@@ -1,26 +1,167 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  /* Surfaces */
+  --color-surface: #050510;
+  --color-surface-raised: #0a0a1a;
+  --color-surface-card: #0f0f23;
+  --color-surface-hover: #141430;
+
+  /* Borders */
+  --color-edge: rgba(255, 255, 255, 0.06);
+  --color-edge-strong: rgba(255, 255, 255, 0.1);
+  --color-edge-glow: rgba(0, 229, 255, 0.25);
+
+  /* Accent palette */
+  --color-neon: #00e5ff;
+  --color-coral: #ff3d71;
+  --color-violet: #7c3aed;
+  --color-gold: #f59e0b;
+  --color-mint: #10b981;
+
+  /* Foreground */
+  --color-fore: #e8e8ed;
+  --color-fore-dim: #9d9db8;
+  --color-fore-muted: #5a5a78;
+
+  /* Font families */
+  --font-display: var(--font-syne);
+  --font-body: var(--font-outfit);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ─── Base ─────────────────────────────────── */
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-surface);
+  color: var(--color-fore);
+  font-family: var(--font-body), ui-sans-serif, system-ui, sans-serif;
+}
+
+::selection {
+  background: rgba(0, 229, 255, 0.25);
+  color: #fff;
+}
+
+/* ─── Scrollbar ────────────────────────────── */
+
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.08); border-radius: 10px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.15); }
+
+/* ─── Utility classes ──────────────────────── */
+
+.glass {
+  background: rgba(15, 15, 35, 0.55);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.glass-strong {
+  background: rgba(15, 15, 35, 0.8);
+  backdrop-filter: blur(32px);
+  -webkit-backdrop-filter: blur(32px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.glow-neon {
+  box-shadow: 0 0 24px rgba(0, 229, 255, 0.12), 0 0 80px rgba(0, 229, 255, 0.04);
+}
+.glow-coral {
+  box-shadow: 0 0 24px rgba(255, 61, 113, 0.12), 0 0 80px rgba(255, 61, 113, 0.04);
+}
+.glow-violet {
+  box-shadow: 0 0 24px rgba(124, 58, 237, 0.12), 0 0 80px rgba(124, 58, 237, 0.04);
+}
+.glow-gold {
+  box-shadow: 0 0 24px rgba(245, 158, 11, 0.12), 0 0 80px rgba(245, 158, 11, 0.04);
+}
+.glow-mint {
+  box-shadow: 0 0 24px rgba(16, 185, 129, 0.12), 0 0 80px rgba(16, 185, 129, 0.04);
+}
+
+/* ─── Grid background ──────────────────────── */
+
+.hero-grid {
+  background-image:
+    linear-gradient(rgba(0, 229, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 229, 255, 0.035) 1px, transparent 1px);
+  background-size: 64px 64px;
+}
+
+.dot-grid {
+  background-image: radial-gradient(rgba(255,255,255,0.04) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* ─── Animations ───────────────────────────── */
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+
+@keyframes pulse-soft {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes beam-down {
+  0% { transform: translateY(-100%); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { transform: translateY(100vh); opacity: 0; }
+}
+
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.animate-float { animation: float 6s ease-in-out infinite; }
+.animate-pulse-soft { animation: pulse-soft 3s ease-in-out infinite; }
+.animate-shimmer {
+  background-size: 200% 100%;
+  animation: shimmer 2.5s linear infinite;
+}
+.animate-spin-slow { animation: spin-slow 20s linear infinite; }
+
+/* ─── Card hover lift ──────────────────────── */
+
+.card-lift {
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s ease;
+}
+.card-lift:hover {
+  transform: translateY(-4px);
+}
+
+/* ─── Gradient text ────────────────────────── */
+
+.gradient-text-neon {
+  background: linear-gradient(135deg, #00e5ff, #7c3aed);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.gradient-text-warm {
+  background: linear-gradient(135deg, #ff3d71, #f59e0b);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.gradient-text-fresh {
+  background: linear-gradient(135deg, #10b981, #00e5ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }

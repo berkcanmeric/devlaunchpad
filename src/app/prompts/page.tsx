@@ -38,7 +38,7 @@ export default function PromptsPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.05 }}
-              className="p-4 rounded-xl border border-edge bg-card"
+              className="p-4 card-gradient"
             >
               <div className="flex items-center gap-2 mb-2">
                 <Terminal className="w-4 h-4 text-muted" />
@@ -74,7 +74,7 @@ export default function PromptsPage() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -8 }}
                 transition={{ duration: 0.2 }}
-                className="rounded-xl border border-edge bg-card p-5"
+                className="card-gradient p-5"
               >
                 <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 mb-3">
                   <div>

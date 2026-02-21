@@ -34,7 +34,7 @@ export default function AiToolsPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.3, delay: i * 0.04 }}
-              className="group p-5 rounded-xl border border-edge bg-card hover:bg-card-hover hover:border-edge-hover transition-all duration-200"
+              className="card-gradient group p-5"
             >
               <div className="flex items-start justify-between mb-2">
                 <div className="flex items-center gap-2">
@@ -73,7 +73,7 @@ export default function AiToolsPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.3, delay: i * 0.04 }}
-              className="p-5 rounded-xl border border-edge bg-card"
+              className="card-gradient p-5"
             >
               <h3 className="text-sm font-semibold text-fore mb-1">{agent.name}</h3>
               <p className="text-xs text-muted mb-2">{agent.role}</p>

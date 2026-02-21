@@ -3,14 +3,15 @@
 @theme inline {
   --color-surface: #09090b;
   --color-raised: #111113;
-  --color-card: #18181b;
-  --color-card-hover: #1c1c20;
-  --color-edge: #27272a;
-  --color-edge-hover: #3f3f46;
+  --color-card: #141416;
+  --color-card-hover: #1a1a1e;
+  --color-edge: #222225;
+  --color-edge-hover: #333338;
   --color-accent: #a78bfa;
   --color-accent-hover: #c4b5fd;
-  --color-accent-dim: rgba(167, 139, 250, 0.08);
-  --color-fore: #fafafa;
+  --color-accent-dim: rgba(167, 139, 250, 0.06);
+  --color-accent-glow: rgba(167, 139, 250, 0.08);
+  --color-fore: #f4f4f5;
   --color-secondary: #a1a1aa;
   --color-muted: #52525b;
   --font-sans: var(--font-jakarta);
@@ -29,7 +30,100 @@ body {
   color: #fff;
 }
 
-::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar { width: 5px; }
 ::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: #27272a; border-radius: 3px; }
+::-webkit-scrollbar-thumb { background: #27272a; border-radius: 10px; }
 ::-webkit-scrollbar-thumb:hover { background: #3f3f46; }
+
+/* ── Gradient border card ────────────────── */
+
+.card-gradient {
+  position: relative;
+  background: var(--color-card);
+  border: 1px solid var(--color-edge);
+  border-radius: 12px;
+  transition: all 0.25s ease;
+}
+
+.card-gradient::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: 13px;
+  padding: 1px;
+  background: linear-gradient(
+    135deg,
+    transparent 40%,
+    rgba(167, 139, 250, 0.0) 40%,
+    rgba(167, 139, 250, 0.0) 100%
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  transition: all 0.4s ease;
+}
+
+.card-gradient:hover::before {
+  background: linear-gradient(
+    135deg,
+    rgba(167, 139, 250, 0.15) 0%,
+    rgba(167, 139, 250, 0.05) 50%,
+    transparent 100%
+  );
+}
+
+.card-gradient:hover {
+  border-color: rgba(167, 139, 250, 0.12);
+  background: var(--color-card-hover);
+}
+
+/* ── Subtle noise overlay ────────────────── */
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.015;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 128px 128px;
+}
+
+/* ── Animated mesh gradient ──────────────── */
+
+@keyframes mesh-shift {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  25% { transform: translate(30px, -20px) scale(1.05); }
+  50% { transform: translate(-20px, 20px) scale(0.95); }
+  75% { transform: translate(10px, 10px) scale(1.02); }
+}
+
+.mesh-gradient {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(120px);
+  pointer-events: none;
+  animation: mesh-shift 20s ease-in-out infinite;
+}
+
+/* ── Code block ──────────────────────────── */
+
+pre {
+  tab-size: 2;
+}
+
+code {
+  font-feature-settings: "liga" 0;
+}
+
+/* ── Smooth focus ────────────────────────── */
+
+input:focus-visible,
+button:focus-visible,
+a:focus-visible {
+  outline: 2px solid rgba(167, 139, 250, 0.4);
+  outline-offset: 2px;
+}

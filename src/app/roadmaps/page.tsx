@@ -31,7 +31,7 @@ function RoadmapSection({ roadmap, index }: { roadmap: Roadmap; index: number })
         {roadmap.steps.map((step, i) => (
           <div
             key={step.title}
-            className="group flex gap-4 p-4 rounded-lg border border-edge bg-card hover:bg-card-hover hover:border-edge-hover transition-all duration-200"
+            className="card-gradient group flex gap-4 p-4"
           >
             <div className="flex-shrink-0 w-7 h-7 rounded-md bg-raised flex items-center justify-center">
               <span className="text-[11px] font-bold text-muted">

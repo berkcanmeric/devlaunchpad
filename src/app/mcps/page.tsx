@@ -42,7 +42,7 @@ export default function McpsPage() {
           initial={{ opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="p-5 rounded-xl border border-edge bg-card mb-8"
+          className="p-5 card-gradient mb-8"
         >
           <h3 className="text-sm font-semibold text-fore mb-2">Quick Setup</h3>
           <p className="text-sm text-secondary mb-3">
@@ -85,7 +85,7 @@ export default function McpsPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.04 }}
-              className="p-5 rounded-xl border border-edge bg-card"
+              className="p-5 card-gradient"
             >
               <div className="flex items-start justify-between mb-2">
                 <div>
